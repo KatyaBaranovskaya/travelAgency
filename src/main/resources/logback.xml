@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/log.log</file>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</Pattern>
+        </layout>
+    </appender>
+
+    <appender name="SOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+        </layout>
+    </appender>
+
+    <logger name="logging.logback.LoggingLogback" level="debug" />
+    <logger name="org.hibernate.sql" level="debug" />
+    <logger name="org.hibernate.type.descriptor.sql" level="trace" />
+
+    <root level="debug">
+        <appender-ref ref="FILE" />
+    </root>
+
+    <root level="info">
+        <appender-ref ref="SOUT" />
+    </root>
+
+</configuration>
