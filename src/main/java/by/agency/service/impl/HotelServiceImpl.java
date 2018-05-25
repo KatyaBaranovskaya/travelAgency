@@ -3,11 +3,9 @@ package by.agency.service.impl;
 import by.agency.domain.Hotel;
 import by.agency.repository.IRepository;
 import by.agency.service.IService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -23,45 +21,44 @@ import java.util.List;
  * @version     1.0
  */
 
+@Slf4j
 @Service("hotelService")
 public class HotelServiceImpl implements IService<Hotel> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(HotelServiceImpl.class);
-
     @Autowired
     private IRepository<Hotel> hotelRepository;
 
     @Override
-    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    @Transactional(readOnly = true)
     public List<Hotel> getAll() {
-        LOGGER.info("Get all hotels");
+        log.info("Get all hotels");
         return hotelRepository.getAll();
     }
 
     @Override
-    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    @Transactional(readOnly = true)
     public Hotel getEntityById(int id) {
-        LOGGER.info("Get hotel");
+        log.info("Get hotel");
         return hotelRepository.getEntityById(id);
     }
 
     @Override
     @Transactional
     public boolean add(Hotel hotel) {
-        LOGGER.info("Add hotel");
+        log.info("Add hotel");
         return hotelRepository.add(hotel);
     }
 
     @Override
     @Transactional
     public boolean removeById(int id) {
-        LOGGER.info("Delete hotel");
+        log.info("Delete hotel");
         return hotelRepository.removeById(id);
     }
 
     @Override
     @Transactional
     public boolean update(Hotel hotel) {
-        LOGGER.info("Update hotel");
+        log.info("Update hotel");
         return hotelRepository.update(hotel);
     }
 }

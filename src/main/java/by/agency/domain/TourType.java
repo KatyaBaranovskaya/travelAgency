@@ -1,5 +1,7 @@
 package by.agency.domain;
 
+import lombok.Getter;
+
 /**
  * The TourType is enum class used for storage
  * type of tour.
@@ -16,13 +18,9 @@ public enum TourType {
     WEEKEND("Weekend"),
     HONEYMOON("Honeymoon");
 
-    private String name;
+    @Getter private String name;
 
     TourType(String name) {
         this.name = name;
-    }
-
-    public String getName() {
-        return name;
     }
 }

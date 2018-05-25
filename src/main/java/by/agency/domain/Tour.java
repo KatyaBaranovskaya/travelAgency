@@ -1,12 +1,15 @@
 package by.agency.domain;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -25,6 +28,9 @@ import java.util.Set;
         @AttributeOverride(name = "version", column = @Column(name = "version"))
 })
 @NamedQuery(name = "getTour", query = "from Tour t where t.id = :id")
+@Data
+@ToString(exclude = "users")
+@EqualsAndHashCode(callSuper = false, exclude = {"country", "hotel", "users"})
 public class Tour extends IEntity {
     @Column
     private String photo;
@@ -62,110 +68,4 @@ public class Tour extends IEntity {
 
     @ManyToMany(mappedBy = "tours")
     private Set<User> users;
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
-    }
-
-    public Hotel getHotel() {
-        return hotel;
-    }
-
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
-    }
-
-    public TourType getType() {
-        return type;
-    }
-
-    public void setType(TourType type) {
-        this.type = type;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public BigDecimal getCost() {
-        return cost;
-    }
-
-    public void setCost(BigDecimal cost) {
-        this.cost = cost;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Tour tour = (Tour) o;
-        return duration == tour.duration &&
-                Objects.equals(photo, tour.photo) &&
-                Objects.equals(date, tour.date) &&
-                Objects.equals(hotel, tour.hotel) &&
-                type == tour.type &&
-                Objects.equals(description, tour.description) &&
-                Objects.equals(cost, tour.cost);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), photo, date, duration, hotel, type, description, cost);
-    }
-
-    @Override
-    public String toString() {
-        return "Tour{" +
-                "photo='" + photo + '\'' +
-                ", date='" + date + '\'' +
-                ", duration=" + duration +
-                ", country=" + country +
-                ", hotel=" + hotel +
-                ", type=" + type +
-                ", description='" + description + '\'' +
-                ", cost=" + cost +
-                '}';
-    }
 }

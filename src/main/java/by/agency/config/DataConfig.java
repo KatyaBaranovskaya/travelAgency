@@ -49,8 +49,6 @@ public class DataConfig {
         props.put("hibernate.show_sql", true);
         props.put("hibernate.hbm2ddl.auto", "update");
         props.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-        props.put("hibernate.cache.use_second_level_cache", true);
-        props.put("hibernate.cache.region.factory_class", "org.hibernate.cache.ehcache.EhCacheRegionFactory");
 
         factoryBean.setHibernateProperties(props);
         return factoryBean;

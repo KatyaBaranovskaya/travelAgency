@@ -3,11 +3,9 @@ package by.agency.service.impl;
 import by.agency.domain.User;
 import by.agency.repository.IRepository;
 import by.agency.service.IService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -23,47 +21,44 @@ import java.util.List;
  * @version     1.0
  */
 
+@Slf4j
 @Service("userService")
 public class UserServiceImpl implements IService<User> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
-
     @Autowired
     private IRepository<User> userRepository;
 
     @Override
-    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    @Transactional(readOnly = true)
     public List<User> getAll() {
-        LOGGER.info("Get all users");
+        log.info("Get all users");
         return userRepository.getAll();
     }
 
     @Override
-    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    @Transactional(readOnly = true)
     public User getEntityById(int id) {
-        LOGGER.info("Get user");
+        log.info("Get user");
         return userRepository.getEntityById(id);
     }
-
-// TODO   (rollbackFor = Exception.class)
 
     @Override
     @Transactional
     public boolean add(User user) {
-        LOGGER.info("Add user");
+        log.info("Add user");
         return userRepository.add(user);
     }
 
     @Override
     @Transactional
     public boolean removeById(int id) {
-        LOGGER.info("Delete user");
+        log.info("Delete user");
         return userRepository.removeById(id);
     }
 
     @Override
     @Transactional
     public boolean update(User user) {
-        LOGGER.info("Update user");
+        log.info("Update user");
         return userRepository.update(user);
     }
 }
