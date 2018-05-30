@@ -1,7 +1,6 @@
 package by.agency.domain;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -24,7 +23,6 @@ import javax.validation.constraints.Size;
 })
 @NamedQuery(name = "getReview", query = "from Review r where r.id = :id")
 @Data
-@EqualsAndHashCode(callSuper = false, exclude = "tour")
 public class Review extends IEntity {
     @NotNull
     @ManyToOne(optional = false)

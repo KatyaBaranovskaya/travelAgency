@@ -24,7 +24,6 @@ import javax.validation.constraints.Size;
 })
 @NamedQuery(name = "getCountry", query = "from Country c where c.id = :id")
 @Data
-@EqualsAndHashCode(callSuper = false)
 public class Country extends IEntity {
     @NotNull
     @Size(min = 3, max = 60)

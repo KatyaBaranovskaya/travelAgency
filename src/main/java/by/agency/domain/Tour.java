@@ -30,14 +30,14 @@ import java.util.Set;
 @NamedQuery(name = "getTour", query = "from Tour t where t.id = :id")
 @Data
 @ToString(exclude = "users")
-@EqualsAndHashCode(callSuper = false, exclude = {"country", "hotel", "users"})
+@EqualsAndHashCode(exclude = "users")
 public class Tour extends IEntity {
     @Column
     private String photo;
 
     @NotNull
     @Column(nullable = false)
-    private LocalDate date;
+    private transient LocalDate date;
 
     @Min(3)
     @NotNull
@@ -66,6 +66,6 @@ public class Tour extends IEntity {
     @Column(nullable = false)
     private BigDecimal cost;
 
-    @ManyToMany(mappedBy = "tours")
+    @ManyToMany(mappedBy = "tours", fetch = FetchType.LAZY)
     private Set<User> users;
 }

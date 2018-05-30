@@ -39,6 +39,14 @@ public class DataConfig {
     }
 
     @Bean
+    @Profile({"jdbc", "test"})
+    public PlatformTransactionManager txManager() {
+        DataSourceTransactionManager txManager = new DataSourceTransactionManager();
+        txManager.setDataSource(dataSource());
+        return txManager;
+    }
+
+    @Bean
     @Profile("jpa")
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
@@ -60,13 +68,5 @@ public class DataConfig {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(getSessionFactory().getObject());
         return transactionManager;
-    }
-
-    @Bean
-    @Profile({"jdbc", "test"})
-    public PlatformTransactionManager txManager() {
-        DataSourceTransactionManager txManager = new DataSourceTransactionManager();
-        txManager.setDataSource(dataSource());
-        return txManager;
     }
 }

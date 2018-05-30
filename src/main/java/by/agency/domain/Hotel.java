@@ -1,7 +1,6 @@
 package by.agency.domain;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -26,7 +25,6 @@ import javax.validation.constraints.Size;
 })
 @NamedQuery(name = "getHotel", query = "from Hotel h where h.id = :id")
 @Data
-@EqualsAndHashCode(callSuper = false)
 public class Hotel extends IEntity {
     @NotNull
     @Size(min = 3)

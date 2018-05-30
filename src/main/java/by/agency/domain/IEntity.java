@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * IEntity is the abstract base class for travel contexts
@@ -16,7 +17,7 @@ import javax.persistence.*;
  */
 
 @MappedSuperclass
-public abstract class IEntity{
+public abstract class IEntity implements Serializable {
     /**
      * Parameter - unique key of an entity.
      */

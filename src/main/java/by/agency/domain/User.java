@@ -27,7 +27,7 @@ import java.util.Set;
 @NamedQuery(name = "getUser", query = "from User u where u.id = :id")
 @Data
 @ToString(exclude = {"tours", "reviews"})
-@EqualsAndHashCode(callSuper = false, exclude = {"tours", "reviews"})
+@EqualsAndHashCode(exclude = {"tours", "reviews"})
 public class User extends IEntity {
     @Column
     @NotNull
@@ -39,12 +39,12 @@ public class User extends IEntity {
     @Column(nullable = false)
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "tour_user", joinColumns = @JoinColumn(name = "id_user",
             referencedColumnName = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_tour",
             referencedColumnName = "id_tour"))
     private Set<Tour> tours;
 
-    @OneToMany(mappedBy = "idUser", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "idUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Review> reviews;
 }
